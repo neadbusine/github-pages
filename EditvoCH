@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>บริการตัดต่อวิดีโอ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/heroicons@1.0.5/umd/heroicons.min.js"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-purple-600">
+
+  <!-- Header -->
+  <header class="text-white text-center py-8">
+    <h1 class="text-4xl font-bold">บริการตัดต่อวิดีโอมืออาชีพ</h1>
+    <nav class="mt-4">
+      <a href="#services" class="px-4 text-lg">บริการ</a>
+      <a href="#contact" class="px-4 text-lg">ติดต่อ</a>
+      <a href="#chat" class="px-4 text-lg">แชท</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="text-white px-4 md:px-0">
+    
+    <!-- Services Section -->
+    <section id="services" class="py-8">
+      <h2 class="text-3xl font-semibold text-center mb-6">บริการของเรา</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white text-center rounded-lg shadow-lg p-6">
+          <h3 class="text-2xl mb-4">🎬 ตัดต่อคลิปทั่วไป</h3>
+          <p>ราคาเริ่มต้น 500 บาท</p>
+        </div>
+        <div class="bg-white text-center rounded-lg shadow-lg p-6">
+          <h3 class="text-2xl mb-4">📺 วิดีโอโปรโมทสินค้า</h3>
+          <p>ราคาเริ่มต้น 1,500 บาท</p>
+        </div>
+        <div class="bg-white text-center rounded-lg shadow-lg p-6">
+          <h3 class="text-2xl mb-4">🎥 คอนเทนต์ YouTube / TikTok</h3>
+          <p>ราคาเริ่มต้น 800 บาท</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-8 bg-gray-800 rounded-lg text-white">
+      <h2 class="text-3xl text-center mb-6">ติดต่อเรา</h2>
+      <form id="contact-form" class="space-y-4">
+        <label for="name" class="block">ชื่อของคุณ:</label>
+        <input type="text" id="name" name="name" class="w-full p-3 bg-gray-700 text-white rounded-lg" required>
+
+        <label for="email" class="block">อีเมล:</label>
+        <input type="email" id="email" name="email" class="w-full p-3 bg-gray-700 text-white rounded-lg" required>
+
+        <label for="message" class="block">รายละเอียดงาน:</label>
+        <textarea id="message" name="message" rows="4" class="w-full p-3 bg-gray-700 text-white rounded-lg" required></textarea>
+
+        <button type="submit" class="w-full p-3 bg-green-500 text-white rounded-lg hover:bg-green-600">ส่งข้อความ</button>
+      </form>
+      <p id="form-status" class="mt-4 text-center"></p>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="py-8">
+      <h2 class="text-3xl text-center text-white mb-6">💬 แชทกับเรา</h2>
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <div id="chat-box" class="space-y-4">
+          <!-- ตัวอย่างแชท -->
+          <div class="text-white">คุณ: สวัสดีครับ</div>
+          <div class="text-white">AI: สวัสดีครับ มีอะไรให้ช่วยมั้ย?</div>
+        </div>
+        <input type="text" id="chat-input" placeholder="พิมพ์ข้อความ..." class="w-full p-3 mt-4 bg-gray-700 text-white rounded-lg">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-white">
+    &copy; 2025 VideoEditPro.com
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+#chat-box {
+  max-height: 300px;
+  overflow-y: scroll;
+  border-bottom: 2px solid #ccc;
+}
+
+#chat-input {
+  border-top: 2px solid #ccc;
+}
+
+#chat-box div {
+  margin-bottom: 10px;
+}
+
+#contact-form input, #contact-form textarea {
+  border: none;
+  outline: none;
+}
+
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+  document.getElementById("form-status").innerText = "✅ ขอบคุณ! เราจะติดต่อกลับภายใน 24 ชั่วโมง";
+  this.reset();
+});
+
+document.getElementById("chat-input").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    let chatBox = document.getElementById("chat-box");
+    let message = document.createElement("div");
+    message.classList.add("text-white");
+    message.innerText = `คุณ: ${this.value}`;
+    chatBox.appendChild(message);
+
+    let response = document.createElement("div");
+    response.classList.add("text-white");
+    response.innerText = "AI: สวัสดีครับ มีอะไรให้ช่วยมั้ย?";
+    chatBox.appendChild(response);
+
+    this.value = ""; // Clear input field
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+  }
+});
